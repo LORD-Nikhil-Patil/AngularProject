@@ -1,0 +1,100 @@
+<div class="flex items-center justify-center flex-col h-full ">
+  <div class="w-full flex justify-between p-2">
+    <button (click)="resetWorkoutType()" class="bg-slate-600 hover:bg-gray-400 text-white py-2 px-4 rounded inline-flex items-center">
+      <span>Reset</span>
+    </button>
+    <button (click)="goToCharts()" class="bg-slate-600 hover:bg-gray-400 text-white py-2 px-4 rounded inline-flex items-center">
+      <span>Check Progress</span>
+    </button>
+  </div>
+  <form [formGroup]="workoutForm" class="flex flex-row px-5 py-5 m" (ngSubmit)="saveWorkout()">
+    <mat-form-field class="w-full mx-5">
+      <mat-label>User Name</mat-label>
+      <input matInput formControlName="userName" placeholder="Name" name="userName" id="userName" value="" required>
+      @if (f['userName'].errors) {
+      <mat-error>
+        @if (f['userName'].errors['required']) {
+        <span class="text-sm font-semibold">Username is required</span>
+        }
+        @if (f['userName'].errors['minlength']) {
+        <span class="text-sm font-semibold">Username must be at least 3 characters</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="w-full">
+      <mat-label>Workout Type</mat-label>
+      <mat-select formControlName="workoutType">
+        @for (workout of workout_types; track workout) {
+        <mat-option [value]="workout">{{workout}}</mat-option>
+        }
+      </mat-select>
+      @if (f['workoutType'].errors) {
+      <mat-error>
+        @if (f['workoutType'].errors['required']) {
+        <span class="text-sm font-semibold">workoutType is required</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+    <mat-form-field class="w-full mx-5">
+      <mat-label>Workout Minutes</mat-label>
+      <input matInput type="number" class="example-right-align" placeholder="Minutes"
+        formControlName="workoutMinutes" />
+      @if (f['workoutMinutes'].errors) {
+      <mat-error>
+        @if (f['workoutMinutes'].errors['required']) {
+        <span class="text-sm font-semibold">workoutMinutes is required</span>
+        }
+      </mat-error>
+      }
+    </mat-form-field>
+
+    <div class="w-full">
+      <button class="w-full bg-slate-600 rounded-md text-white hover:bg-slate-500 h-full mb-5">Save Workout</button>
+    </div>
+  </form>
+  <div class="mat-elevation-z8 w-5/6 overflow-scroll">
+    <div class="w-full flex justify-between">
+      <mat-form-field class="w-full mr-1">
+        <mat-label>Filter</mat-label>
+        <input matInput [(value)]="searchValue" (keyup)="applyFilter($event)" placeholder="Search" #input>
+      </mat-form-field>
+      <mat-form-field class="w-full ml-1">
+        <mat-label>Workout Type</mat-label>
+        <mat-select [(value)]="selectedWorkoutType" (selectionChange)="onWorkoutTypeChange($event)">
+          @for (workout of workout_types; track workout) {
+          <mat-option [value]="workout">{{workout}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header="userName" start="desc"> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="workoutType">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Workout </th>
+        <td mat-cell *matCellDef="let element"> {{element.workoutType}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="count">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Number of Workouts </th>
+        <td mat-cell *matCellDef="let element"> {{element.count}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="workoutMinutes">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Workout Minutes </th>
+        <td mat-cell *matCellDef="let element"> {{element.workoutMinutes}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+</div>

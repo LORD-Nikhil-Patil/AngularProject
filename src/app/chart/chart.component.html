@@ -1,0 +1,17 @@
+<div class="flex h-full p-4">
+    <div class="w-1/4 bg-white align-top rounded-md overflow-scroll">
+        <ul class="p-4 ">
+            @for (key of userKeys; track key) {
+                <li class="h-10 border-b-2 py-2 px-2 text-black hover:bg-slate-400 capitalize text-base font-medium"
+                (click)="handleChartData(key)"
+                >{{key}}</li>
+            }
+        </ul>
+    </div>
+    <div class="h-full w-3/4 bg-slate-50 p-14 mx-2 rounded-md">
+        <div class="absolute w-20 z-40 left-auto flex justify-center right-auto ml-auto mr-auto min-h-20">
+             <div class="bg-teal-300 min-h-20 h-full"></div>
+        </div>
+        <div id="chart" #chartContainer class="h-full w-full"></div>
+    </div>
+</div>
