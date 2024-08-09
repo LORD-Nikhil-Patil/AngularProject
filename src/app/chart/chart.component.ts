@@ -14,10 +14,6 @@ import { CommonModule } from '@angular/common';
 import { Exercise } from '../types';
 import { D3Service } from '../services/d3.service';
 
-const Exercises: Exercise[] = JSON.parse(
-  localStorage.getItem('workouts') || '[]'
-).reverse();
-
 interface Workout {
   workoutType: string;
   workoutMinutes: number;
@@ -45,6 +41,9 @@ export class ChartComponent implements OnInit, AfterViewInit {
 }];
   userList: GroupedWorkouts[] = [];
   userKeys: string[] = [];
+  Exercises: Exercise[] = JSON.parse(
+    localStorage.getItem('workouts') || '[]'
+  ).reverse();
 
   @Input() title!: string;
 
@@ -122,7 +121,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
   groupWorkoutsByUser(): GroupedWorkouts[] {
     const groupedData: GroupedWorkouts[] = [];
 
-    Exercises.forEach((workout) => {
+    this.Exercises.forEach((workout) => {
       const { userName, workoutType, workoutMinutes, count } = workout;
 
       // Normalize the userName
