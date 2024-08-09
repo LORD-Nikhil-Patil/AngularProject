@@ -49,7 +49,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
   @Input() title!: string;
 
   public chartId;
-  private highestValue: string;
+  private highestValue: number;
   private svg;
   private margin = 40;
   private width;
@@ -73,7 +73,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
         highestCurrentValue = barValue;
       }
       if (tableLength == i + 1) {
-        this.highestValue = highestCurrentValue.toString();
+        this.highestValue = highestCurrentValue;
       }
     });
     this.cdRef.detectChanges();
@@ -93,18 +93,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
    handleChartData(key: string): void {
     let filteredData = []
     let highestCurrentValue = 0;
-    let tableLength = this.data.length;
     if (this.userList.hasOwnProperty(key)) {
       filteredData = this.userList[key];
       filteredData.forEach((data, i) => {
-        const barValue = Number(data.workoutMinutes);
-        if (barValue > highestCurrentValue) {
-          highestCurrentValue = barValue + 50;
-        }
-        if (tableLength == i + 1) {
-          this.highestValue = highestCurrentValue.toString();
+        if (highestCurrentValue < data.workoutMinutes) {
+          highestCurrentValue = data.workoutMinutes;
         }
       });
+      this.highestValue = highestCurrentValue;
       this.svg.selectAll("*").remove();
         this.drawBars(filteredData);
     }
