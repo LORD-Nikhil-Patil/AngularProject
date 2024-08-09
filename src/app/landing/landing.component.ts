@@ -17,6 +17,114 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import {Exercise} from '../types'
 
+const defaultList = [
+  {
+      "userName": "test",
+      "workoutType": "Weightlifting",
+      "workoutMinutes": 147,
+      "count": 2
+  },
+  {
+      "userName": "test",
+      "workoutType": "Bodyweight Exercises",
+      "workoutMinutes": 58,
+      "count": 2
+  },
+  {
+      "userName": "Ravi",
+      "workoutType": "Running/Jogging",
+      "workoutMinutes": 60,
+      "count": 2
+  },
+  {
+      "userName": "Ravi",
+      "workoutType": "Swimming",
+      "workoutMinutes": 20,
+      "count": 1
+  },
+  {
+      "userName": "Ravi",
+      "workoutType": "Yoga",
+      "workoutMinutes": 50,
+      "count": 1
+  },
+  {
+      "userName": "Kishan",
+      "workoutType": "Pilates",
+      "workoutMinutes": 45,
+      "count": 1
+  },
+  {
+      "userName": "kishan",
+      "workoutType": "Dynamic Stretching",
+      "workoutMinutes": 23,
+      "count": 1
+  },
+  {
+      "userName": "kishan",
+      "workoutType": "Resistance Bands",
+      "workoutMinutes": 444,
+      "count": 1
+  },
+  {
+      "userName": "Rahul",
+      "workoutType": "Medicine Ball Workouts",
+      "workoutMinutes": 20,
+      "count": 1
+  },
+  {
+      "userName": "Rahul",
+      "workoutType": "Cycling",
+      "workoutMinutes": 50,
+      "count": 1
+  },
+  {
+      "userName": "Rahul",
+      "workoutType": "Swimming (Endurance)",
+      "workoutMinutes": 60,
+      "count": 1
+  },
+  {
+      "userName": "Manish",
+      "workoutType": "Zumba",
+      "workoutMinutes": 60,
+      "count": 1
+  },
+  {
+      "userName": "Manish",
+      "workoutType": "Dynamic Stretching",
+      "workoutMinutes": 20,
+      "count": 1
+  },
+  {
+      "userName": "Shubham",
+      "workoutType": "Power Yoga",
+      "workoutMinutes": 40,
+      "count": 1
+  },
+  {
+      "userName": "Shubham",
+      "workoutType": "Pilates",
+      "workoutMinutes": 300,
+      "count": 1
+  },
+  {
+      "userName": "shubham",
+      "workoutType": "Walking",
+      "workoutMinutes": 56,
+      "count": 1
+  },
+  {
+      "userName": "shubham",
+      "workoutType": "Long-Distance Running",
+      "workoutMinutes": 50,
+      "count": 1
+  }
+]
+
+localStorage.setItem('workouts', JSON.stringify(defaultList));
+
+
 const Exercises: Exercise[] = JSON.parse(
   localStorage.getItem('workouts') || '[]'
 ).reverse();
