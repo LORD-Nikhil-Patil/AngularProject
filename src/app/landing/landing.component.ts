@@ -189,7 +189,7 @@ export class LandingComponent implements AfterViewInit {
 
   workoutForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, public router: Router, public route: ActivatedRoute) {
     this.workoutForm = this.fb.group({
       userName: ['', [Validators.required, Validators.minLength(3)]],
       workoutType: ['', Validators.required],

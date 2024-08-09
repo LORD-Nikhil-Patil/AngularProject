@@ -160,14 +160,14 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   private drawBars(data: any[]): void {
-    // Creating X-axis band scale
+    //  X-axis band scale
     const x = this.d3.d3
       .scaleBand()
       .range([0, this.width])
       .domain(data.map((d) => d.workoutType))
       .padding(0.2);
 
-    // Drawing X-axis on the DOM
+    //  X-axis on the DOM
     this.svg
       .append('g')
       .attr('transform', 'translate(0,' + this.height + ')')
@@ -177,20 +177,20 @@ export class ChartComponent implements OnInit, AfterViewInit {
       // .style('text-anchor', 'end')
       .style('font-size', '14px');
 
-    // Creaate Y-axis band scale
+    //  Y-axis band scale
     const y = this.d3.d3
       .scaleLinear()
       .domain([0, Number(this.highestValue) + 50])
       .range([this.height, 0]);
 
-    // Draw the Y-axis on the DOM
+    //  Y-axis on the DOM
     this.svg
       .append('g')
       .call(this.d3.d3.axisLeft(y))
       .selectAll('text')
       .style('font-size', '14px');
 
-    // Create and fill the bars
+    // fill the bars
     this.svg
       .selectAll('bars')
       .data(data)
