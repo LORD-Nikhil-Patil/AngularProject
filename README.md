@@ -1,6 +1,6 @@
 ## Live Demo 
 
-https://66b68431e930a174eb459415--musical-gingersnap-a06496.netlify.app/
+https://darling-quokka-1a8233.netlify.app/
 
 # Workout tracker
 
